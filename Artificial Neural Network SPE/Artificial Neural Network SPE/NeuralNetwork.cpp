@@ -56,22 +56,25 @@ void NeuralNetwork::test( std::vector< std::vector< double > > input, std::vecto
 		forwardPropagation();
 		auto M = collection[last].make_matrices(false).first;
 		err.push_back(sumSquaredDifference(M, target));
-		std::cout << vecToString(input[i]) << " --> " << vecToString(M) << " - " << vecToString(target) << std::endl;
+		std::cout << vecToString(input[i]) << " --> " << vecToString/*Rounded*/(M) << " - " << vecToString(target) << std::endl;
 	}
-	std::cout << "%" << average(err) << std::endl;
+	std::cout << "%" << average(err) * 100 << std::endl;
 }
 
 void NeuralNetwork::train(std::vector<std::vector<double>> input, std::vector<std::vector<double>> expected)
 {
 	//may need to rework
-	std::vector<double> err;
-	for (int ii = 0; ii < 1; ii++)
+	//std::vector<double> err;
+	for (int ii = 0; ii < 50; ii++)
 	{
+		//std::vector<double> cost;
 		for (int i = 0; i < expected.size(); i++)
 		{
 			target = expected[i];
 			collection[0].input(input[i]);
 			forwardPropagation();
+			//cost.push_back(sumSquaredDifference(collection[last].make_matrices(false).first, target));
+			//learningRate = average(cost);
 			for (int L = 0; L < collection.size() - 1; L++)
 			{
 				for (int N = 0; N < collection[L].getSize()+1; N++)
@@ -88,6 +91,7 @@ void NeuralNetwork::train(std::vector<std::vector<double>> input, std::vector<st
 				}
 			}
 		}
+		//learningRate = average(cost);
 		averageDeltaWeights(expected.size());
 		// I did not update the weights
 		updateWeights();
@@ -130,7 +134,7 @@ void NeuralNetwork::forwardPropagation()
 	{
 		auto please = collection[i].getIn();
 		collection[ i ].function_of_input();
-		std::cout << vecToString(please) << " -> " << vecToString(collection[i].make_matrices(false).first) << std::endl;
+		//std::cout << vecToString(please) << " -> " << vecToString(collection[i].make_matrices(false).first) << std::endl;
 		// std::cout << i << ": " << vecToString(collection[i].make_matrices(true).first) << std::endl;
 		//auto M = collection[i].make_matrices();
 		//math M.first, M.second
@@ -204,7 +208,7 @@ double NeuralNetwork::backwardPropagation(int L, int N, int W)
 
 		for (int cn = 0; cn < collection[last].getSize(); cn++)
 		{
-			dErr_dLNW += pow((collection[last].getOutput(cn) - target[cn]), 2) * deriveSums[last][cn];
+			dErr_dLNW += (collection[last].getOutput(cn) - target[cn])*2 * deriveSums[last][cn];
 		}
 		dErr_dLNW *= collection[L + 1].dOut_dIn(W)*collection[L].getOutput(N);
 	}
@@ -212,7 +216,7 @@ double NeuralNetwork::backwardPropagation(int L, int N, int W)
 	{
 		//
 		//
-		dErr_dLNW = pow((collection[last].getOutput(W) - target[W]), 2)/2 * collection[L].dOut_dIn(W)*collection[L].getOutput(N);
+		dErr_dLNW = (collection[last].getOutput(W) - target[W])*2 * collection[L].dOut_dIn(W)*collection[L].getOutput(N);
 	}
 	return dErr_dLNW;
 }

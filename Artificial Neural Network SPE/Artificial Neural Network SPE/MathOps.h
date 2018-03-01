@@ -26,6 +26,28 @@ std::string vecToString( std::vector< D > toS )
 	}
 }
 
+template< typename D >
+std::string vecToStringRounded(std::vector< D > toS)
+{
+	if (toS.size() > 0)
+	{
+		std::stringstream alf;
+		alf.precision(3);
+		alf.fixed;
+		alf << "{ ";
+		for (int i = 0; i < toS.size() - 1; i++)
+		{
+			alf << round(toS[i]) << ", ";
+		}
+		alf << round(toS[toS.size() - 1]) << " }";
+		return alf.str();
+	}
+	else
+	{
+		return "";
+	}
+}
+
 // sigmoid
 template< typename D >
 D squash( D de_squashed )

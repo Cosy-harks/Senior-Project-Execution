@@ -80,9 +80,9 @@ void Node::pushWeight(double w)
 
 void Node::pushWeights( int ws )
 {
-	for ( int i = 1; i < ws + 1; i++ )
+	for ( int i = 0; i < ws; i++ )
 	{
-		pushWeight( i * 0.012 );
+		pushWeight((double)rand() / (double)RAND_MAX);
 	}
 }
 
