@@ -18,6 +18,7 @@ public:
 	*/
 	// good for creating matrix
 	std::vector<double> getWeights();
+	bool setWeights(std::vector<double>);
 	double getIn();
 
 	double dOut_dIn();

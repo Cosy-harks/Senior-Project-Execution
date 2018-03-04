@@ -36,6 +36,8 @@ public:
 
 	// node, weight, value
 	void setWeight(int, int, double);
+	// this layers node gets these weight values
+	void setWeightsOf(int node, std::vector<double> with);
 	// node, weight indices
 	double getWeight(int, int);
 
@@ -44,6 +46,8 @@ public:
 
 	double dOut_dIn(int);
 	double getOutput(int);
+
+	Node operator[](int n) { return (n < getSize()) ? neurons[n] : bias; }
 
 private:
 	std::vector<Node> neurons;

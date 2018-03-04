@@ -62,6 +62,18 @@ std::vector<double> Node::getWeights()
 	return weight;
 }
 
+bool Node::setWeights(std::vector<double> these)
+{
+	if (these.size() == weight.size()) {
+		for (int w = 0; w < weight.size(); w++)
+		{
+			this->weight[w] = these[w];
+		}
+		return true;
+	}
+	return false;
+}
+
 double Node::getIn()
 {
 	return inputSum;

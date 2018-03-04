@@ -88,9 +88,25 @@ void Layer::setWeight(int n, int w, double v)
 	{
 		neurons[n].weight[w] = v;
 	}
-	else
+	else if (n == neurons.size())
 	{
 		bias.weight[w] = v;
+	}
+}
+
+void Layer::setWeightsOf(int node, std::vector<double> with)
+{
+	if (node < neurons.size())
+	{
+		for (int w = 0; w < neurons[node].weight.size(); w++) {
+			setWeight(node, w, with[w]);
+		}
+	}
+	else if(node == neurons.size())
+	{
+		for (int w = 0; w < bias.weight.size(); w++) {
+			setWeight(node, w, with[w]);
+		}
 	}
 }
 
