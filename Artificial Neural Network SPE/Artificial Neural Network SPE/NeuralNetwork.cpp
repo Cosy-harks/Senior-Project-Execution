@@ -6,7 +6,8 @@ NeuralNetwork::NeuralNetwork():
 	deriveSums( std::vector< std::vector< double >>() ),
 	target( std::vector< double >() ),
 	learningRate( 0.25 ),
-	last()
+	validError(0.001),
+	last(0)
 {
 }
 
@@ -14,7 +15,8 @@ NeuralNetwork::NeuralNetwork( std::vector< int > v ):
 	collection( std::vector< Layer >() ),
 	deriveSums( std::vector< std::vector< double >>() ),
 	target( std::vector< double >() ),
-	learningRate( 0.05 ),
+	learningRate( 0.15 ),
+	validError(0.0001),
 	last( v.size() - 1 )
 {
 	for (int i = 0; i < v.size(); i++)
@@ -40,6 +42,20 @@ NeuralNetwork::~NeuralNetwork()
 {
 }
 
+void NeuralNetwork::fillNetwork(std::vector<std::vector<double>> weights)
+{
+	int index = 0;
+	int n = 0;
+	for (int i = 0; i < weights.size(); i++)
+	{
+		if (i-n > collection[index].getSize()) { index++; n = i; }
+		if (index < collection.size() - 1)
+		{
+			collection[index].setWeightsOf(i-n, weights[i]);
+		}
+	}
+}
+
 void NeuralNetwork::addLayer( unsigned int ns )
 {
 	collection.push_back( Layer( ns ) );
@@ -56,38 +72,45 @@ void NeuralNetwork::test( std::vector< std::vector< double > > input, std::vecto
 		forwardPropagation();
 		auto M = collection[last].make_matrices(false).first;
 		err.push_back(sumSquaredDifference(M, target));
-		std::cout << vecToString(input[i]) << " --> " << vecToString(M) << " - " << vecToString(target) << std::endl;
+		std::cout << vecToString(input[i]) << " --> " << vecToString/*Rounded*/(M) << " - " << vecToString(target) << std::endl;
 	}
-	std::cout << "%" << average(err) << std::endl;
+	std::cout << "%" << average(err) * 100 << std::endl;
 }
 
 void NeuralNetwork::train(std::vector<std::vector<double>> input, std::vector<std::vector<double>> expected)
 {
 	//may need to rework
-	std::vector<double> err;
-	for (int ii = 0; ii < 1; ii++)
+	//std::vector<double> err;
+	for (int ii = 0; ii < 50; ii++)
 	{
+		//std::vector<double> cost;
 		for (int i = 0; i < expected.size(); i++)
 		{
 			target = expected[i];
 			collection[0].input(input[i]);
 			forwardPropagation();
-			for (int L = 0; L < collection.size() - 1; L++)
-			{
-				for (int N = 0; N < collection[L].getSize()+1; N++)
+			std::vector<double> a = collection[last].make_matrices(false).first;
+			double error = sumSquaredDifference(a, target);
+			//learningRate = average(cost);
+			if ( error*100 > validError ) {
+				for (int L = 0; L < collection.size() - 1; L++)
 				{
-					for (int W = 0; W < collection[L + 1].getSize(); W++)
+					for (int N = 0; N < collection[L].getSize() + 1; N++)
 					{
-						clearing();
-						//std::cout << "cleared" << std::endl;
-						double d = backwardPropagation(L, N, W);
-						// std::cout << "Error With respect to weight: "<< L << ", " << N << ", " << W << " is: " << d << std::endl;
-						//std::cout << d << std::endl;
-						collection[L].setdWeight(N, W, collection[L].getdWeight(N, W) - d*learningRate);
+						for (int W = 0; W < collection[L + 1].getSize(); W++)
+						{
+							clearing();
+							//std::cout << "cleared" << std::endl;
+							double d = backwardPropagation(L, N, W);
+							// std::cout << "Error With respect to weight: "<< L << ", " << N << ", " << W << " is: " << d << std::endl;
+							//std::cout << d << std::endl;
+							collection[L].setdWeight(N, W, collection[L].getdWeight(N, W) - d*learningRate);
+						}
 					}
 				}
 			}
 		}
+		//learningRate = average(cost);
 		averageDeltaWeights(expected.size());
 		// I did not update the weights
 		updateWeights();
@@ -130,7 +153,7 @@ void NeuralNetwork::forwardPropagation()
 	{
 		auto please = collection[i].getIn();
 		collection[ i ].function_of_input();
-		std::cout << vecToString(please) << " -> " << vecToString(collection[i].make_matrices(false).first) << std::endl;
+		//std::cout << vecToString(please) << " -> " << vecToString(collection[i].make_matrices(false).first) << std::endl;
 		// std::cout << i << ": " << vecToString(collection[i].make_matrices(true).first) << std::endl;
 		//auto M = collection[i].make_matrices();
 		//math M.first, M.second
@@ -204,7 +227,7 @@ double NeuralNetwork::backwardPropagation(int L, int N, int W)
 
 		for (int cn = 0; cn < collection[last].getSize(); cn++)
 		{
-			dErr_dLNW += pow((collection[last].getOutput(cn) - target[cn]), 2) * deriveSums[last][cn];
+			dErr_dLNW += (collection[last].getOutput(cn) - target[cn])*2 * deriveSums[last][cn];
 		}
 		dErr_dLNW *= collection[L + 1].dOut_dIn(W)*collection[L].getOutput(N);
 	}
@@ -212,12 +235,12 @@ double NeuralNetwork::backwardPropagation(int L, int N, int W)
 	{
 		//
 		//
-		dErr_dLNW = pow((collection[last].getOutput(W) - target[W]), 2)/2 * collection[L].dOut_dIn(W)*collection[L].getOutput(N);
+		dErr_dLNW = (collection[last].getOutput(W) - target[W])*2 * collection[L].dOut_dIn(W)*collection[L].getOutput(N);
 	}
 	return dErr_dLNW;
 }
 
-void NeuralNetwork::wideDerivative(int cwl, int cn, int L, int W, double & dErr_dLNW)
+/*void NeuralNetwork::wideDerivative(int cwl, int cn, int L, int W, double & dErr_dLNW)
 {
 	// May need to rework
 	if (L + 3 == cwl)
@@ -247,7 +270,7 @@ void NeuralNetwork::wideDerivative(int cwl, int cn, int L, int W, double & dErr_
 		deriveSums[cwl][cn] = (dErr_dLNW);
 		dErr_dLNW = 0.0;
 	}
-}
+}*/
 
 void NeuralNetwork::averageDeltaWeights(int averager)
 {

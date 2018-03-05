@@ -62,6 +62,18 @@ std::vector<double> Node::getWeights()
 	return weight;
 }
 
+bool Node::setWeights(std::vector<double> these)
+{
+	if (these.size() == weight.size()) {
+		for (int w = 0; w < weight.size(); w++)
+		{
+			this->weight[w] = these[w];
+		}
+		return true;
+	}
+	return false;
+}
+
 double Node::getIn()
 {
 	return inputSum;
@@ -80,9 +92,9 @@ void Node::pushWeight(double w)
 
 void Node::pushWeights( int ws )
 {
-	for ( int i = 1; i < ws + 1; i++ )
+	for ( int i = 0; i < ws; i++ )
 	{
-		pushWeight( i * 0.012 );
+		pushWeight((double)rand() / (double)RAND_MAX);
 	}
 }
 
