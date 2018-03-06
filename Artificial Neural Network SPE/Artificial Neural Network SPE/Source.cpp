@@ -15,7 +15,7 @@ int main()
 	auto L = Layer();
 	std::vector<std::vector<double>> input =  { { 1, 0, 0 }, { 0, 1, 0 }, { 0, 0, 0 }, { 0, 1, 1 }, { 0, 0, 1 } }; //, { 1, 0, 1 }, { 1, 1, 1 }};
 	std::vector<std::vector<double>> output = { { 1, 0, 1 }, { 0, 1, 1 }, { 0, 0, 1 }, { 1, 0, 0 }, { 0, 1, 0 } }; //, { 1, 1, 0 }, { 0, 0, 0 } };
-	std::vector<int> D = { (int)input[0].size(), 7, 7, (int)output[0].size() };
+	std::vector<int> D = { (int)input[0].size(), 3, (int)output[0].size() };
 /*Load This Binary inc networks
 3743
 0: { -0.379, -1.32, 0.154, 0.31, -0.209, 1.18, -0.31 }
@@ -67,7 +67,7 @@ int main()
 3:
 
 */
-	std::vector<std::vector<double>> fill = {
+	/*std::vector<std::vector<double>> fill = {
 		{ -0.804, 1.3, -0.748, -0.484, -0.209, 0.957, -0.953 },
 		{ 0.632, -1.39, -0.0692, -1.55, 0.0645, -0.815, 0.148 },
 		{ -0.618, 0.417, 1.41, 1.57, -0.153, -0.298, 0.295 },
@@ -89,16 +89,16 @@ int main()
 		{ 1.26, -0.295, -0.238 },
 		{ 0.0743, -0.819, 0.0635 },
 		{}, {}, {}, {} };
-
+		*/
 	NeuralNetwork N = NeuralNetwork(D);
-	N.fillNetwork(fill);
+	//N.fillNetwork(fill);
 	//std::cout << vecToString(N[0][0].weight) << std::endl;
 	//N[0].setWeightsOf(0, std::vector<double> { -0.379, -1.32, 0.154, 0.31, -0.209, 1.18, -0.31 });
 	//std::cout << vecToString(N[0][0].weight) << std::endl;
 
 	N.print();
 	N.test(input, output);
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 200; i++)
 	{
 		N.train(input, output);
 		N.test(input, output);

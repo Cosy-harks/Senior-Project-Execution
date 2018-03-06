@@ -1,45 +1,13 @@
-﻿  NeuralNetwork.cpp
-c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(22): warning C4018: '<': signed/unsigned mismatch
-c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(26): warning C4018: '<': signed/unsigned mismatch
-c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(35): warning C4018: '<': signed/unsigned mismatch
-c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(49): warning C4018: '<': signed/unsigned mismatch
-c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(52): warning C4018: '<': signed/unsigned mismatch
-c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(68): warning C4018: '<': signed/unsigned mismatch
-c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(87): warning C4018: '<': signed/unsigned mismatch
-c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(96): warning C4018: '<': signed/unsigned mismatch
-c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(123): warning C4018: '<': signed/unsigned mismatch
-c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(141): warning C4018: '<': signed/unsigned mismatch
-c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(143): warning C4018: '<': signed/unsigned mismatch
-c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(152): warning C4018: '<': signed/unsigned mismatch
-c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(161): warning C4018: '<': signed/unsigned mismatch
-c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(179): warning C4018: '<': signed/unsigned mismatch
-c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(277): warning C4018: '<': signed/unsigned mismatch
-c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(291): warning C4018: '<': signed/unsigned mismatch
-c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\mathops.h(101): warning C4018: '<': signed/unsigned mismatch
-  c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(74): note: see reference to function template instantiation 'D sumSquaredDifference<double>(std::vector<double,std::allocator<_Ty>>,std::vector<_Ty,std::allocator<_Ty>>)' being compiled
-          with
-          [
-              D=double,
-              _Ty=double
-          ]
+﻿  Source.cpp
+c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\source.cpp(135): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\source.cpp(138): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\source.cpp(165): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\source.cpp(167): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\source.cpp(179): warning C4018: '<': signed/unsigned mismatch
 c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\mathops.h(16): warning C4018: '<': signed/unsigned mismatch
-  c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(75): note: see reference to function template instantiation 'std::string vecToString<double>(std::vector<double,std::allocator<_Ty>>)' being compiled
+  c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\source.cpp(146): note: see reference to function template instantiation 'std::string vecToString<double>(std::vector<double,std::allocator<_Ty>>)' being compiled
           with
           [
               _Ty=double
           ]
-c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\mathops.h(112): warning C4018: '<': signed/unsigned mismatch
-  c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(77): note: see reference to function template instantiation 'D average<double>(std::vector<double,std::allocator<_Ty>>)' being compiled
-          with
-          [
-              D=double,
-              _Ty=double
-          ]
-c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\mathops.h(63): warning C4018: '<': signed/unsigned mismatch
-  c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(163): note: see reference to function template instantiation 'std::vector<double,std::allocator<_Ty>> dot<double>(std::pair<std::vector<_Ty,std::allocator<_Ty>>,std::vector<std::vector<_Ty,std::allocator<_Ty>>,std::allocator<std::vector<_Ty,std::allocator<_Ty>>>>>)' being compiled
-          with
-          [
-              _Ty=double
-          ]
-c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\mathops.h(66): warning C4018: '<': signed/unsigned mismatch
   Artificial Neural Network SPE.vcxproj -> C:\Users\us3rs\Desktop\Senior Project Execution\Artificial Neural Network SPE\Debug\Artificial Neural Network SPE.exe
