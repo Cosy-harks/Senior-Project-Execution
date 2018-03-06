@@ -13,9 +13,9 @@ int main()
 	std::cout.fixed;
 	Node I = Node();
 	auto L = Layer();
-	std::vector<std::vector<double>> input =  { { 1, 0, 0 }, { 0, 1, 0 }, { 0, 0, 0 }, { 0, 1, 1 }, { 0, 0, 1 } }; //, { 1, 0, 1 }, { 1, 1, 1 }};
-	std::vector<std::vector<double>> output = { { 1, 0, 1 }, { 0, 1, 1 }, { 0, 0, 1 }, { 1, 0, 0 }, { 0, 1, 0 } }; //, { 1, 1, 0 }, { 0, 0, 0 } };
-	std::vector<int> D = { (int)input[0].size(), 3, (int)output[0].size() };
+	std::vector<std::vector<double>> input =  { { 1, 0, 0 }, { 0, 1, 0 }, { 0, 0, 0 }, { 0, 1, 1 }, { 0, 0, 1 }, { 1, 0, 1 } }; //, { 1, 1, 1 }};
+	std::vector<std::vector<double>> output = { { 1, 0, 1 }, { 0, 1, 1 }, { 0, 0, 1 }, { 1, 0, 0 }, { 0, 1, 0 }, { 1, 1, 0 } }; //, { 0, 0, 0 } };
+	std::vector<int> D = { (int)input[0].size(), 4, 4, (int)output[0].size() };
 /*Load This Binary inc networks
 3743
 0: { -0.379, -1.32, 0.154, 0.31, -0.209, 1.18, -0.31 }
