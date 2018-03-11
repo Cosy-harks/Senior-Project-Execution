@@ -94,7 +94,7 @@ void Node::pushWeights( int ws )
 {
 	for ( int i = 0; i < ws; i++ )
 	{
-		pushWeight((double)rand() / (double)RAND_MAX);
+		pushWeight((double)rand() / (double)RAND_MAX-0.3);
 	}
 }
 

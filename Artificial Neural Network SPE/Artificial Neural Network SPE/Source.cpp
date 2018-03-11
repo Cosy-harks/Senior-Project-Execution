@@ -5,16 +5,53 @@
 #include <sstream>
 #include <iostream>
 #include <iomanip>
+#include <list>
+#include <fstream>
+#include <string>
 
 
 int main()
 {
 	std::cout.precision(3);
 	std::cout.fixed;
-	Node I = Node();
-	auto L = Layer();
-	std::vector<std::vector<double>> input =  { { 1, 0, 0 }, { 0, 1, 0 }, { 0, 0, 0 }, { 0, 1, 1 }, { 0, 0, 1 }, { 1, 0, 1 } }; //, { 1, 1, 1 }};
-	std::vector<std::vector<double>> output = { { 1, 0, 1 }, { 0, 1, 1 }, { 0, 0, 1 }, { 1, 0, 0 }, { 0, 1, 0 }, { 1, 1, 0 } }; //, { 0, 0, 0 } };
+	//Node I = Node();
+	//auto L = Layer();
+	std::vector<std::vector<double>> input = { { 1, 0, 0 }, { 0, 1, 0 }, { 0, 0, 0 }, { 0, 1, 1 }, { 0, 0, 1 }, { 1, 0, 1 }, { 1, 1, 1 } }; //
+	std::vector<std::vector<double>> output = { { 1, 0, 1 }, { 0, 1, 1 }, { 0, 0, 1 }, { 1, 0, 0 }, { 0, 1, 0 }, { 1, 1, 0 }, { 0, 0, 0 } }; //
+
+	std::list<int> tiffs;
+	std::list<int> tiffed;
+	for (int i = 1; i <= 60000; i++)
+	{
+		tiffs.push_back(i);
+	}
+
+	for (int i = 0; i < 10; i++)
+	{
+		int y = round((double)rand() / (double)RAND_MAX*tiffs.size());
+		tiffs.remove(y);
+		tiffed.push_back(y);
+		std::string tiff;
+		if (y < 10) { tiff = "0000"+std::to_string(y); }
+		else if (y / 10 < 10) { tiff = "000" + std::to_string(y); }
+		else if (y / 100 < 10) { tiff = "00" + std::to_string(y); }
+		else if (y / 1000 < 10) { tiff = "0" + std::to_string(y); }
+		else { tiff = std::to_string(y); }
+		std::cout << tiff << std::endl;
+		tiff += ".tif";
+		tiff = "../../mnist-train-images-tiff/" + tiff;
+		std::cout << tiff << std::endl;
+		std::ifstream tiffin (tiff);
+		std::string line;
+		if (tiffin.is_open()) {
+			while (getline(tiffin, line))
+			{
+				std::cout << line << std::endl;
+			}
+		}
+		else std::cout << "unable to open\n";
+	}
+
 	std::vector<int> D = { (int)input[0].size(), 7, 7, (int)output[0].size() };
 /*Load This Binary inc networks
 3743
@@ -67,7 +104,7 @@ int main()
 3:
 
 */
-	std::vector<std::vector<double>> fill = {
+	/*std::vector<std::vector<double>> fill = {
 		{ -0.804, 1.3, -0.748, -0.484, -0.209, 0.957, -0.953 },
 		{ 0.632, -1.39, -0.0692, -1.55, 0.0645, -0.815, 0.148 },
 		{ -0.618, 0.417, 1.41, 1.57, -0.153, -0.298, 0.295 },
@@ -89,23 +126,30 @@ int main()
 		{ 1.26, -0.295, -0.238 },
 		{ 0.0743, -0.819, 0.0635 },
 		{}, {}, {}, {} };
-		
+	*/
 	NeuralNetwork N = NeuralNetwork(D);
-	N.fillNetwork(fill);
+	//N.fillNetwork(fill);
 	//std::cout << vecToString(N[0][0].weight) << std::endl;
 	//N[0].setWeightsOf(0, std::vector<double> { -0.379, -1.32, 0.154, 0.31, -0.209, 1.18, -0.31 });
 	//std::cout << vecToString(N[0][0].weight) << std::endl;
 
 	N.print();
 	N.test(input, output);
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 20 * 1; i++)
 	{
 		N.train(input, output);
 		N.test(input, output);
+	//	for (int j = 0; j < 9; j++) {
+	//		input[j][0] = { randoms(20) };
+	//		output[j][0] = { input[j][0]*input[j][0] };
+	//	}
 	}
 	N.print();
+
+	N.test(input, output);
+	//N.test(x, y);
 	
-	I.add(0.25);
+	/*I.add(0.25);
 	//std::cout << "I.add(0.25) to input. Output = " << I.getOutput() << std::endl;
 	L.push_neuron(I);
 	//std::cout << "L.push_neuron(I) to layer." << std::endl;
@@ -192,6 +236,7 @@ int main()
 	I.mathFunctions();
 	d = I.getOutput();
 	//std::cout << "output after activation\n" << d << std::endl;
+	*/
 	system("pause");
 	return 0;
 }

@@ -1,5 +1,7 @@
 #pragma once
 #include <vector>
+
+//Model
 class Neuron
 {
 	double output;
