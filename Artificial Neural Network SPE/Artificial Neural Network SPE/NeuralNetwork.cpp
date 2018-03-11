@@ -15,8 +15,8 @@ NeuralNetwork::NeuralNetwork( std::vector< int > v ):
 	collection( std::vector< Layer >() ),
 	deriveSums( std::vector< std::vector< double >>() ),
 	target( std::vector< double >() ),
-	learningRate( 0.09 ),
-	validError(0.0001),
+	learningRate( 0.004 ),
+	validError(0.00000001),
 	last( v.size() - 1 )
 {
 	for (int i = 0; i < v.size(); i++)
@@ -32,10 +32,10 @@ NeuralNetwork::NeuralNetwork( std::vector< int > v ):
 			deriveSums[i].push_back(0.0);
 		}
 	}
-	for (unsigned int startNodes = 0; startNodes < collection[0].getSize(); startNodes++)
-	{
-		collection[0].setFunction(0, startNodes);
-	}
+	//for (unsigned int startNodes = 0; startNodes < collection[0].getSize(); startNodes++)
+	//{
+	//	collection[0].setFunction(0, startNodes);
+	//}
 }
 
 NeuralNetwork::~NeuralNetwork()
@@ -71,10 +71,10 @@ void NeuralNetwork::test( std::vector< std::vector< double > > input, std::vecto
 		collection[0].input(input[i]);
 		forwardPropagation();
 		auto M = collection[last].make_matrices(false).first;
-		err.push_back(sumSquaredDifference(M, target));
+		err.push_back(error(M, target));
 		std::cout << vecToString(input[i]) << " --> " << vecToString/*Rounded*/(M) << " - " << vecToString(target) << std::endl;
 	}
-	std::cout << "%" << average(err) * 100 << std::endl;
+	std::cout << "%" << average(err) << std::endl;
 }
 
 void NeuralNetwork::train(std::vector<std::vector<double>> input, std::vector<std::vector<double>> expected)
@@ -90,9 +90,9 @@ void NeuralNetwork::train(std::vector<std::vector<double>> input, std::vector<st
 			collection[0].input(input[i]);
 			forwardPropagation();
 			std::vector<double> a = collection[last].make_matrices(false).first;
-			double error = sumSquaredDifference(a, target);
+			double err = error(a, target);
 			//learningRate = average(cost);
-			if ( error*100 > validError ) {
+			if ( err > validError ) {
 				for (int L = 0; L < collection.size() - 1; L++)
 				{
 					for (int N = 0; N < collection[L].getSize() + 1; N++)
@@ -227,15 +227,21 @@ double NeuralNetwork::backwardPropagation(int L, int N, int W)
 
 		for (int cn = 0; cn < collection[last].getSize(); cn++)
 		{
-			dErr_dLNW += (collection[last].getOutput(cn) - target[cn])*2 * deriveSums[last][cn];
+			dErr_dLNW += ((collection[last].getOutput(cn) - target[cn])*2) * deriveSums[last][cn];
 		}
 		dErr_dLNW *= collection[L + 1].dOut_dIn(W)*collection[L].getOutput(N);
 	}
 	else
 	{
+
+		//if (target[W] == 0) {
+		dErr_dLNW = ((collection[last].getOutput(W) - target[W])*2) * collection[L].dOut_dIn(W)*collection[L].getOutput(N);
+		//}
+		//else {
+		//	dErr_dLNW = ((collection[last].getOutput(W) - target[W])/target[W]) * collection[L].dOut_dIn(W)*collection[L].getOutput(N);
+		//}
 		//
 		//
-		dErr_dLNW = (collection[last].getOutput(W) - target[W])*2 * collection[L].dOut_dIn(W)*collection[L].getOutput(N);
 	}
 	return dErr_dLNW;
 }
