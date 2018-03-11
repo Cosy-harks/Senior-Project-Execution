@@ -92,17 +92,38 @@ std::vector< D > elemWiseSubtraction( std::vector< D > a, std::vector< D > b )
 template< typename D >
 D sumSquaredDifference( std::vector< D > a, std::vector< D > b )
 {
-	if ( a.size() != b.size() ) {
-		std::cout << a.size() << " nope " << b.size() << std::endl;
-		return pow(a[0] - b[0], 2);
-	}
-
 	D c = D(0.0);
 	for ( int i = 0; i < a.size(); i++ )
 	{
 		c += pow( a[ i ] - b[ i ], 2 );
 	}
-	return c;
+	return c*100;
+}
+
+template < typename D >
+D fractionalError(std::vector< D > a, std::vector< D > b) 
+{
+	D c = D(0.0);
+	for (int i = 0; i < a.size(); i++)
+	{
+		c += abs(a[i] - b[i])/b[i];
+	}
+	return c*100;
+}
+
+template< typename D >
+D error(std::vector< D > a, std::vector< D > b) 
+{
+	if (a.size() != b.size()) {
+		std::cout << a.size() << " nope " << b.size() << std::endl;
+		return a[-1];
+	}
+	for (auto bz : b) {
+		if (bz > 1) {
+			return fractionalError(a, b);
+		}
+	}
+	return sumSquaredDifference(a, b);
 }
 
 template< typename D >
@@ -115,4 +136,9 @@ D average(std::vector< D > a)
 	}
 	c /= a.size();
 	return c;
+}
+
+template< typename D >
+double randoms(D max) {
+	return (double)rand() / (double)RAND_MAX*max;
 }

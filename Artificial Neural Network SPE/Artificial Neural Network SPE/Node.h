@@ -34,7 +34,6 @@ public:
 	
 
 	int switchValue;
-	double derivativeValue;
 
 private:
 	double inputSum;
