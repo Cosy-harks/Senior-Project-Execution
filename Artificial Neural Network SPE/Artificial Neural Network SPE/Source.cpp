@@ -16,18 +16,22 @@ int main()
 	std::cout.precision(3);
 	std::cout.fixed;
 
+	bool mnist = true;
+
 	std::vector<std::vector<double>> input;// = { { 1, 0, 0 }, { 0, 1, 0 }, { 0, 0, 0 }, { 0, 1, 1 }, { 0, 0, 1 }, { 1, 0, 1 }, { 1, 1, 1 } }; //
 	std::vector<std::vector<double>> output;// = { { 1, 0, 1 }, { 0, 1, 1 }, { 0, 0, 1 }, { 1, 0, 0 }, { 0, 1, 0 }, { 1, 1, 0 }, { 0, 0, 0 } }; //
 
 	auto docs = mnist::read_dataset<std::vector, std::vector, uint8_t, uint8_t>("C:\\Users\\us3rs\\Documents\\GitHub\\mnist");
 
-	//input = docs.training_images;
-	for (int a = 0; a < 30; a++) {
-		output.push_back(std::vector<double>());
-		input.push_back(std::vector<double>());
-		output[a].push_back(docs.training_labels[a]);
-		for (int b = 0; b < docs.training_images[0].size(); b++) {
-			input[a].push_back(docs.training_images[a][b]);
+	if (mnist) {
+		//input = docs.training_images;
+		for (int a = 0; a < 30; a++) {
+			output.push_back(std::vector<double>());
+			input.push_back(std::vector<double>());
+			output[a].push_back(docs.training_labels[a]);
+			for (int b = 0; b < docs.training_images[0].size(); b++) {
+				input[a].push_back(docs.training_images[a][b]);
+			}
 		}
 	}
 
@@ -113,18 +117,29 @@ int main()
 	//std::cout << vecToString(N[0][0].weight) << std::endl;
 
 	N.print();
-	N.test(std::vector < std::vector<double>>{input[0]}, std::vector<std::vector<double>>{output[0]});
-	for (int i = 0; i < 20 * 1; i++)
-	{
-		std::vector<std::vector<double>> batch = std::vector<std::vector<double>>{ input[i] };
-		std::vector<std::vector<double>> obatch = { output[i] };
-		for (int _ = 0; _ < 10; _++) { batch.push_back(input[i]); obatch.push_back(output[i++]); }
-		N.train(batch, obatch);
-		N.test(batch, obatch);
-	//	for (int j = 0; j < 9; j++) {
-	//		input[j][0] = { randoms(20) };
-	//		output[j][0] = { input[j][0]*input[j][0] };
-	//	}
+	
+	if (mnist) {
+		N.test(std::vector < std::vector<double>>{input[0]}, std::vector<std::vector<double>>{output[0]});
+		for (int i = 0; i < 20 * 1; i++)
+		{
+			
+			std::vector<std::vector<double>> batch = std::vector<std::vector<double>>{ input[i] };
+			std::vector<std::vector<double>> obatch = { output[i] };
+			for (int _ = 0; _ < 10; _++) { batch.push_back(input[i]); obatch.push_back(output[i++]); }
+			N.train(batch, obatch);
+			N.test(batch, obatch);
+			//	for (int j = 0; j < 9; j++) {
+			//		input[j][0] = { randoms(20) };
+			//		output[j][0] = { input[j][0]*input[j][0] };
+			//	}
+		}
+	}
+	else {
+		for (int i = 0; i < 20 * 10; i++)
+		{
+			N.train(input, output);
+			N.test(input, output);
+		}
 	}
 	N.print();
 	

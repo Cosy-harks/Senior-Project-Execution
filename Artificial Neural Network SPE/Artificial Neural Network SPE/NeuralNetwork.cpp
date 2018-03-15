@@ -15,7 +15,7 @@ NeuralNetwork::NeuralNetwork( std::vector< int > v ):
 	collection( std::vector< Layer >() ),
 	deriveSums( std::vector< std::vector< double >>() ),
 	target( std::vector< double >() ),
-	learningRate( 0.004 ),
+	learningRate( 0.0004 ),
 	validError(0.00000001),
 	last( v.size() - 1 )
 {
@@ -34,7 +34,10 @@ NeuralNetwork::NeuralNetwork( std::vector< int > v ):
 	}
 	for (unsigned int startNodes = 0; startNodes < collection[0].getSize(); startNodes++)
 	{
-		collection[0].setFunction(0, startNodes);
+		collection[0].setFunction(1, startNodes);
+	}
+	for (unsigned int endNodes = 0; endNodes < collection[last].getSize(); endNodes++) {
+		collection[last].setFunction(0, endNodes);
 	}
 }
 
@@ -81,7 +84,7 @@ void NeuralNetwork::train(std::vector<std::vector<double>> input, std::vector<st
 {
 	//may need to rework
 	//std::vector<double> err;
-	for (int ii = 0; ii < 10; ii++)
+	for (int ii = 0; ii < 2; ii++)
 	{
 		//std::vector<double> cost;
 		for (int i = 0; i < expected.size(); i++)
@@ -136,6 +139,36 @@ void NeuralNetwork::print()
 	}
 }
 
+void NeuralNetwork::assignDeriveSum(int L, int W)
+{
+	if (cwl > L + 3)
+	{
+		if (n < collection[cwl - 1].getSize())
+		{
+			deriveSums[cwl][cn] += collection[cwl - 1].getWeight(n, cn)*collection[cwl - 1].dOut_dIn(n)*deriveSums[cwl - 1][n];
+		}
+		else
+		{
+			deriveSums[cwl][cn] += collection[cwl - 1].getWeight(n, cn)*collection[cwl - 1].dOut_dIn(n);
+		}
+	}
+	else if (cwl == L + 3)
+	{
+		if (n < collection[cwl - 1].getSize())
+		{
+			deriveSums[cwl][cn] += collection[L + 2].getWeight(n, cn)*collection[L + 2].dOut_dIn(n)*collection[L + 1].getWeight(W, n);
+		}
+		else
+		{
+			deriveSums[cwl][cn] += collection[L + 2].getWeight(n, cn)*collection[L + 2].dOut_dIn(n);
+		}
+	}
+	else if (cwl == L + 2)
+	{
+		deriveSums[cwl][cn] = 1;
+	}
+}
+
 void NeuralNetwork::clearing()
 {
 	for (int i = 0; i < deriveSums.size(); i++)
@@ -172,43 +205,19 @@ void NeuralNetwork::forwardPropagation()
 double NeuralNetwork::backwardPropagation(int L, int N, int W)
 {
 	// may need to rework
-	//deriveSums.clear();
 	double dErr_dLNW = 0.0;
 	if (L + 1 < last)
 	{
-		for (int cwl = (L + 3 < last) ? L + 3 : last; cwl < collection.size(); cwl++)
+		// layer loop
+		for (cwl = (L + 3 < last) ? L + 3 : last; cwl < collection.size(); cwl++)
 		{
-			for (int cn = 0; cn < collection[cwl].getSize(); cn++)
+			// node in layer loop
+			for (cn = 0; cn < collection[cwl].getSize(); cn++)
 			{
-				for (int n = 0; n < collection[cwl - 1].getSize()+1; n++)
+				// node in next layer loop
+				for (n = 0; n < collection[cwl - 1].getSize()+1; n++)
 				{
-					//			wideDerivative(cwl, cn, L, W, dErr_dLNW);
-					if (cwl > L + 3)
-					{
-						if (n < collection[cwl - 1].getSize())
-						{
-							deriveSums[cwl][cn] += collection[cwl - 1].getWeight(n, cn)*collection[cwl - 1].dOut_dIn(n)*deriveSums[cwl - 1][n];
-						}
-						else
-						{
-							deriveSums[cwl][cn] += collection[cwl - 1].getWeight(n, cn)*collection[cwl - 1].dOut_dIn(n);
-						}
-					}
-					else if (cwl == L + 3)
-					{
-						if (n < collection[cwl - 1].getSize())
-						{
-							deriveSums[cwl][cn] += collection[L + 2].getWeight(n, cn)*collection[L + 2].dOut_dIn(n)*collection[L + 1].getWeight(W, n);
-						}
-						else
-						{
-							deriveSums[cwl][cn] += collection[L + 2].getWeight(n, cn)*collection[L + 2].dOut_dIn(n);
-						}
-					}
-					else if (cwl == L + 2)
-					{
-						deriveSums[cwl][cn] = 1;
-					}
+					assignDeriveSum(L, W);
 				}
 
 			}
@@ -225,23 +234,45 @@ double NeuralNetwork::backwardPropagation(int L, int N, int W)
 		//	//dErr_dLNW += 2 * (output[i] - target[i]) * deriveSum[dsindex++];
 		//}
 
-		for (int cn = 0; cn < collection[last].getSize(); cn++)
-		{
-			dErr_dLNW += ((collection[last].getOutput(cn) - target[cn])*2) * deriveSums[last][cn];
-		}
-		dErr_dLNW *= collection[L + 1].dOut_dIn(W)*collection[L].getOutput(N);
+		dErr_dLNW += calcErr(L, N, W);
 	}
 	else
 	{
 
 		//if (target[W] == 0) {
-		dErr_dLNW = ((collection[last].getOutput(W) - target[W])*2) * collection[L].dOut_dIn(W)*collection[L].getOutput(N);
+		dErr_dLNW = calcErr(L, N, W);
 		//}
 		//else {
 		//	dErr_dLNW = ((collection[last].getOutput(W) - target[W])/target[W]) * collection[L].dOut_dIn(W)*collection[L].getOutput(N);
 		//}
 		//
 		//
+	}
+	return dErr_dLNW;
+}
+
+double NeuralNetwork::calcErr(int L, int N, int W)
+{
+	double dErr_dLNW = 0.0;
+	if (L + 1 < last)
+	{
+		for (cn = 0; cn < collection[last].getSize(); cn++)
+		{
+			double outErr = collection[last].getOutput(cn) - target[cn];
+			if (outErr > 1 || outErr < -1)
+			{
+				dErr_dLNW += ((outErr > 0)? 1 : -1) * 2 * deriveSums[last][cn];
+			}
+			else
+			{
+				dErr_dLNW += ((collection[last].getOutput(cn) - target[cn]) * 2) * deriveSums[last][cn];
+			}
+		}
+		dErr_dLNW *= collection[L + 1].dOut_dIn(W)*collection[L].getOutput(N);
+	}
+	else
+	{
+		dErr_dLNW = ((collection[last].getOutput(W) - target[W]) * 2) * collection[L].dOut_dIn(W)*collection[L].getOutput(N);
 	}
 	return dErr_dLNW;
 }

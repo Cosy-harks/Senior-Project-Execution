@@ -42,9 +42,10 @@ void Layer::push_weights()
 	for (int i = 0; i < neurons.size(); i++)
 	{
 		neurons[i].pushWeight((double)rand()/(double)RAND_MAX-0.3);// (neurons[i].getWeightSize() + 0.5)*0.1);
-		neurons[i].switchValue = 0;
-		std::cout << neurons[i].switchValue;
-		
+		if (rand() < RAND_MAX/2) {
+			neurons[i].switchValue = 1;
+			std::cout << neurons[i].switchValue;
+		}
 	}
 	bias.pushWeight((double)rand()/(double)RAND_MAX-0.3);
 }

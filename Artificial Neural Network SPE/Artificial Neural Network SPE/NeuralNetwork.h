@@ -41,12 +41,18 @@ private:
 	double validError;
 	int last;
 
+	// current working layer, node in next layer, current node
+	int cwl, n, cn;
+	//sets a deriveSum[][] value from the backProp func
+	void assignDeriveSum(int L, int W);
 	// cleans data holding vars for training
 	void clearing();
 	// moves the information along the network
 	void forwardPropagation();
 	//layer, node, weight return deltaError_to_deltaWeight
 	double backwardPropagation(int, int, int);
+
+	double calcErr(int L, int N, int W);
 
 	// current working layer, current node, Tended to layer, deriveSum, specific index
 	/*void wideDerivative(int, int, int, int, double &);*/

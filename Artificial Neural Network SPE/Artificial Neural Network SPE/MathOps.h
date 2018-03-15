@@ -17,7 +17,9 @@ std::string vecToString( std::vector< D > toS )
 		{
 			alf << toS[i] << ", ";
 		}
-		alf << " ... ";
+		if (toS.size() > 20) {
+			alf << " ... ";
+		}
 		for (int i = toS.size() - 11; i < toS.size() - 1 && i >= 10; i++)
 		{
 			alf << round(toS[i]) << ", ";
