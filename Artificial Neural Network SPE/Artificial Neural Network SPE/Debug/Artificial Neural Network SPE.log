@@ -1,3 +1,14 @@
-﻿  Source.cpp
-c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\source.cpp(31): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+﻿  Layer.cpp
+c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\layer.cpp(42): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\layer.cpp(63): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\layer.cpp(75): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\layer.cpp(92): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\layer.cpp(104): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\layer.cpp(106): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\layer.cpp(112): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\layer.cpp(120): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\layer.cpp(156): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\layer.cpp(168): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\layer.cpp(184): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\layer.cpp(206): warning C4018: '<': signed/unsigned mismatch
   Artificial Neural Network SPE.vcxproj -> C:\Users\us3rs\Desktop\Senior Project Execution\Artificial Neural Network SPE\Debug\Artificial Neural Network SPE.exe

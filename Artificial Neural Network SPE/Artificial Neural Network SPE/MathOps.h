@@ -13,9 +13,14 @@ std::string vecToString( std::vector< D > toS )
 		alf.precision(3);
 		alf.fixed;
 		alf << "{ ";
-		for (int i = 0; i < toS.size() - 1; i++)
+		for (int i = 0; i < 10 && i < toS.size() - 1; i++)
 		{
 			alf << toS[i] << ", ";
+		}
+		alf << " ... ";
+		for (int i = toS.size() - 11; i < toS.size() - 1 && i >= 10; i++)
+		{
+			alf << round(toS[i]) << ", ";
 		}
 		alf << toS[toS.size() - 1] << " }";
 		return alf.str();
@@ -35,7 +40,12 @@ std::string vecToStringRounded(std::vector< D > toS)
 		alf.precision(3);
 		alf.fixed;
 		alf << "{ ";
-		for (int i = 0; i < toS.size() - 1; i++)
+		for (int i = 0; i < 10 && i < toS.size() - 1; i++)
+		{
+			alf << round(toS[i]) << ", ";
+		}
+		alf << " ... ";
+		for (int i = toS.size() - 11; i < toS.size() - 1 && i >= 10; i++)
 		{
 			alf << round(toS[i]) << ", ";
 		}

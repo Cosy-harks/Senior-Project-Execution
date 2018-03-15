@@ -32,10 +32,10 @@ NeuralNetwork::NeuralNetwork( std::vector< int > v ):
 			deriveSums[i].push_back(0.0);
 		}
 	}
-	//for (unsigned int startNodes = 0; startNodes < collection[0].getSize(); startNodes++)
-	//{
-	//	collection[0].setFunction(0, startNodes);
-	//}
+	for (unsigned int startNodes = 0; startNodes < collection[0].getSize(); startNodes++)
+	{
+		collection[0].setFunction(0, startNodes);
+	}
 }
 
 NeuralNetwork::~NeuralNetwork()
@@ -81,7 +81,7 @@ void NeuralNetwork::train(std::vector<std::vector<double>> input, std::vector<st
 {
 	//may need to rework
 	//std::vector<double> err;
-	for (int ii = 0; ii < 50; ii++)
+	for (int ii = 0; ii < 10; ii++)
 	{
 		//std::vector<double> cost;
 		for (int i = 0; i < expected.size(); i++)

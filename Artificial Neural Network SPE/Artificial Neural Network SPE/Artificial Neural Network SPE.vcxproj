@@ -75,6 +75,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -117,6 +118,8 @@
     <ClInclude Include="Node.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\TinyTIFF\tinytiffhighrestimer.cpp" />
+    <ClCompile Include="..\..\..\TinyTIFF\tinytiffreader.cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="NeuralNetwork.cpp" />
     <ClCompile Include="Node.cpp" />
