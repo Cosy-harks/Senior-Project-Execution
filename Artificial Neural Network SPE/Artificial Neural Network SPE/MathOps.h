@@ -60,6 +60,24 @@ std::string vecToStringRounded(std::vector< D > toS)
 	}
 }
 
+template< typename D>
+void normalize(std::vector<D> &vect) {
+	D magnitude = mag(vect);
+	for (int i = 0; i < vect.size(); i++) {
+		vect[i] = vect[i] / magnitude;
+	}
+}
+
+template< typename D >
+D mag(std::vector<D> findMagOf) {
+	D hmm = 0.0;
+	for (int i = 0; i < findMagOf.size(); i++) {
+		hmm += pow(findMagOf[i], 2);
+	}
+	hmm = sqrt(hmm);
+	return hmm;
+}
+
 // sigmoid
 template< typename D >
 D squash( D de_squashed )

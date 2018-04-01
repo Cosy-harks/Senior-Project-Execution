@@ -38,11 +38,17 @@ public:
 	void setWeight(int, int, double);
 	// this layers node gets these weight values
 	void setWeightsOf(int node, std::vector<double> with);
+	// node, weights vector
+	void setdWeightsOf(int node, std::vector<double> with);
 	// node, weight indices
 	double getWeight(int, int);
 
+	// node, weight, value
 	void setdWeight(unsigned int, unsigned int, double);
+	// node, weight
 	double getdWeight(unsigned int, unsigned int);
+	// node
+	std::vector<double> getdWeights(unsigned int);
 
 	double dOut_dIn(int);
 	double getOutput(int);

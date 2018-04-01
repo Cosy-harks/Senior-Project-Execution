@@ -323,14 +323,20 @@ void NeuralNetwork::averageDeltaWeights(int averager)
 	}
 }
 
+// move to Neuron each neuron can update it's own weights
+// neurons can normalize the change in weights too
 void NeuralNetwork::updateWeights()
 {
 	for (int L = 0; L < collection.size()-1; L++)
 	{
 		for (int N = 0; N < collection[L].getSize()+1; N++)
 		{
+			std::vector<double> toNorm = collection[L].getdWeights(N);
+			normalize(toNorm);
+			collection[L].setdWeightsOf(N, toNorm);
 			for (int W = 0; W < collection[L + 1].getSize(); W++)
 			{
+				// set dweights with norm
 				collection[L].setWeight(N, W, collection[L].getWeight(N, W) + collection[L].getdWeight(N, W));
 				collection[L].setdWeight(N, W, 0);
 				//std::cout << collection[L].getdWeight(N, W);

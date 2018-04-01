@@ -115,6 +115,22 @@ void Layer::setWeightsOf(int node, std::vector<double> with)
 	}
 }
 
+void Layer::setdWeightsOf(int node, std::vector<double> with)
+{
+	if (node < neurons.size())
+	{
+		for (int w = 0; w < neurons[node].deltaWeight.size(); w++) {
+			setdWeight(node, w, with[w]);
+		}
+	}
+	else if (node == neurons.size())
+	{
+		for (int w = 0; w < bias.deltaWeight.size(); w++) {
+			setdWeight(node, w, with[w]);
+		}
+	}
+}
+
 double Layer::getWeight(int n, int w)
 {
 	if (n < neurons.size())
@@ -139,6 +155,7 @@ void Layer::setdWeight(unsigned int n, unsigned int w, double val)
 	}
 }
 
+// node, weight
 double Layer::getdWeight(unsigned int a, unsigned int b)
 {
 	if (a < neurons.size())
@@ -148,6 +165,16 @@ double Layer::getdWeight(unsigned int a, unsigned int b)
 	else
 	{
 		return bias.deltaWeight[b];
+	}
+}
+
+std::vector<double> Layer::getdWeights(unsigned int n)
+{
+	if (n < neurons.size()) {
+		return neurons[n].deltaWeight;
+	}
+	else {
+		return bias.deltaWeight;
 	}
 }
 

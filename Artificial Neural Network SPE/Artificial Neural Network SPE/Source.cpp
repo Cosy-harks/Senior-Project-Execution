@@ -10,6 +10,8 @@
 #include <fstream>
 #include <string>
 
+// Idea Normalize deltaWeights before applying 
+
 
 int main()
 {
@@ -35,7 +37,7 @@ int main()
 		}
 	}
 
-	std::vector<int> D = { (int)input[0].size(), 7, 7, (int)output[0].size() };
+	std::vector<int> D = { (int)input[0].size(), 16, 16, (int)output[0].size() };
 	/*Load This Binary inc networks
 	3743
 	0: { -0.379, -1.32, 0.154, 0.31, -0.209, 1.18, -0.31 }
