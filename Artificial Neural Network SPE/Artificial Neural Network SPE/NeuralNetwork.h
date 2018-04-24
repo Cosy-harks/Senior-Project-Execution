@@ -18,6 +18,8 @@ public:
 	// push a layer with # of neurons in the layer
 	void addLayer(unsigned int);
 
+	void shakeup();
+
 	// first < < vec > > of start values, < < vec > > expected values
 	//prints the average error squared
 	void test(std::vector<std::vector<double>>, std::vector<std::vector<double>>);
@@ -38,6 +40,7 @@ private:
 
 
 	double learningRate;
+	double maxChange;
 	double validError;
 	int last;
 

@@ -118,8 +118,6 @@
     <ClInclude Include="Node.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\TinyTIFF\tinytiffhighrestimer.cpp" />
-    <ClCompile Include="..\..\..\TinyTIFF\tinytiffreader.cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="NeuralNetwork.cpp" />
     <ClCompile Include="Node.cpp" />

@@ -100,24 +100,19 @@ void Node::pushWeights( int ws )
 
 void Node::mathFunctions()
 {
-	switch ( switchValue )
-	{
 	
-	case 0:
-		// If inputSum > 0 derivativeInputToOutput = 1
-		// else derivativeInputToOutput = 0
-		output = ( inputSum > 0 ) ? inputSum : 0;
-		derivativeOutputToInput = ( inputSum > 0 ) ? 1 : 0;
-		inputSum = 0;
-		break;
-	default:
-		// 
-		output = 1.0 / ( 1.0 + exp( -inputSum ) );	// do/di = 1/( 2 + e^-x + e^x );
-													// do/di = output * ( 1 - output );
-													// output = 1/( 1 + e^-x )
-													// 1/( 1 + e^-x ) * ( 1 - 1/( 1 + e^-x ) == 1/( 2 + e^-x + e^x );
-		derivativeOutputToInput = 1.0 / ( 2.0 + exp( -inputSum ) + exp( inputSum ) );
-		inputSum = 0;
-		break;
+	//output = 1.0 / ( 1.0 + exp( -inputSum ) );
+												// do/di = 1/( 2 + e^-x + e^x );
+	if (inputSum > 0) {							// do/di = output * ( 1 - output );
+		output = inputSum;						// output = 1/( 1 + e^-x )
+		derivativeOutputToInput = 1;
 	}
+	else {											// 1/( 1 + e^-x ) * ( 1 - 1/( 1 + e^-x ) == 1/( 2 + e^-x + e^x );
+		output = 0;
+		derivativeOutputToInput = 0;
+	}
+		//derivativeOutputToInput = 1.0 / ( 2.0 + exp( -inputSum ) + exp( inputSum ) );
+		inputSum = 0;
+	/*	break;
+	}*/
 }

@@ -42,12 +42,12 @@ void Layer::push_weights()
 	for (int i = 0; i < neurons.size(); i++)
 	{
 		neurons[i].pushWeight((double)rand()/(double)RAND_MAX-0.3);// (neurons[i].getWeightSize() + 0.5)*0.1);
-		if (rand() < RAND_MAX/2) {
-			neurons[i].switchValue = 1;
-			std::cout << neurons[i].switchValue;
-		}
+		//if (rand() < RAND_MAX/2) {
+			//neurons[i].switchValue = 1;
+			//std::cout << neurons[i].switchValue;
+		//}
 	}
-	bias.pushWeight((double)rand()/(double)RAND_MAX-0.3);
+	bias.pushWeight((double)rand() / (double)RAND_MAX - 0.3);
 }
 
 void Layer::push_weights(int ws)
@@ -103,13 +103,13 @@ void Layer::setWeightsOf(int node, std::vector<double> with)
 {
 	if (node < neurons.size())
 	{
-		for (int w = 0; w < neurons[node].weight.size(); w++) {
+		for (int w = 0; w < neurons[node].weight.size() && w < with.size(); w++) {
 			setWeight(node, w, with[w]);
 		}
 	}
 	else if(node == neurons.size())
 	{
-		for (int w = 0; w < bias.weight.size(); w++) {
+		for (int w = 0; w < bias.weight.size() && w < with.size(); w++) {
 			setWeight(node, w, with[w]);
 		}
 	}

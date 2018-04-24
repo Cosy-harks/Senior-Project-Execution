@@ -1,4 +1,62 @@
-﻿  Source.cpp
-c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\mnist\mnist_reader_common.hpp(46): warning C4244: 'initializing': conversion from 'std::streamoff' to 'unsigned int', possible loss of data
-c:\users\us3rs\desktop\senior project execution\artificial neural network spe\artificial neural network spe\source.cpp(34): warning C4018: '<': signed/unsigned mismatch
-  Artificial Neural Network SPE.vcxproj -> C:\Users\us3rs\Desktop\Senior Project Execution\Artificial Neural Network SPE\Debug\Artificial Neural Network SPE.exe
+﻿  NeuralNetwork.cpp
+c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(24): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(28): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(54): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(57): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(72): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(75): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(76): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(87): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(104): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(113): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(139): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(188): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(190): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(199): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(208): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(226): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(328): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(344): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\mathops.h(16): warning C4018: '<': signed/unsigned mismatch
+  c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(94): note: see reference to function template instantiation 'std::string vecToString<double>(std::vector<double,std::allocator<_Ty>>)' being compiled
+          with
+          [
+              _Ty=double
+          ]
+c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\mathops.h(22): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\mathops.h(28): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\mathops.h(170): warning C4018: '<': signed/unsigned mismatch
+  c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(96): note: see reference to function template instantiation 'D average<double>(std::vector<double,std::allocator<_Ty>>)' being compiled
+          with
+          [
+              D=double,
+              _Ty=double
+          ]
+c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\mathops.h(100): warning C4018: '<': signed/unsigned mismatch
+  c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(210): note: see reference to function template instantiation 'std::vector<double,std::allocator<_Ty>> dot<double>(std::pair<std::vector<_Ty,std::allocator<_Ty>>,std::vector<std::vector<_Ty,std::allocator<_Ty>>,std::allocator<std::vector<_Ty,std::allocator<_Ty>>>>>)' being compiled
+          with
+          [
+              _Ty=double
+          ]
+c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\mathops.h(103): warning C4018: '<': signed/unsigned mismatch
+c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\mathops.h(144): warning C4018: '<': signed/unsigned mismatch
+  c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\mathops.h(160): note: see reference to function template instantiation 'D fractionalError<double>(std::vector<double,std::allocator<_Ty>>,std::vector<_Ty,std::allocator<_Ty>>)' being compiled
+          with
+          [
+              D=double,
+              _Ty=double
+          ]
+  c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\neuralnetwork.cpp(93): note: see reference to function template instantiation 'D error<double>(std::vector<double,std::allocator<_Ty>>,std::vector<_Ty,std::allocator<_Ty>>)' being compiled
+          with
+          [
+              D=double,
+              _Ty=double
+          ]
+c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\mathops.h(133): warning C4018: '<': signed/unsigned mismatch
+  c:\users\us3rs\desktop\senior_proj_exec\senior project execution\artificial neural network spe\artificial neural network spe\mathops.h(163): note: see reference to function template instantiation 'D sumSquaredDifference<double>(std::vector<double,std::allocator<_Ty>>,std::vector<_Ty,std::allocator<_Ty>>)' being compiled
+          with
+          [
+              D=double,
+              _Ty=double
+          ]
+  Artificial Neural Network SPE.vcxproj -> C:\Users\us3rs\Desktop\Senior_Proj_Exec\Senior Project Execution\Artificial Neural Network SPE\Debug\Artificial Neural Network SPE.exe
