@@ -18,6 +18,8 @@ public:
 	// push a layer with # of neurons in the layer
 	void addLayer(unsigned int);
 
+	void shakeup();
+
 	// first < < vec > > of start values, < < vec > > expected values
 	//prints the average error squared
 	void test(std::vector<std::vector<double>>, std::vector<std::vector<double>>);
@@ -38,15 +40,22 @@ private:
 
 
 	double learningRate;
+	double maxChange;
 	double validError;
 	int last;
 
+	// current working layer, node in next layer, current node
+	int cwl, n, cn;
+	//sets a deriveSum[][] value from the backProp func
+	void assignDeriveSum(int L, int W);
 	// cleans data holding vars for training
 	void clearing();
 	// moves the information along the network
 	void forwardPropagation();
 	//layer, node, weight return deltaError_to_deltaWeight
 	double backwardPropagation(int, int, int);
+
+	double calcErr(int L, int N, int W);
 
 	// current working layer, current node, Tended to layer, deriveSum, specific index
 	/*void wideDerivative(int, int, int, int, double &);*/

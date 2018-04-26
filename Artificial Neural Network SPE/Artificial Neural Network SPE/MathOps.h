@@ -13,10 +13,24 @@ std::string vecToString( std::vector< D > toS )
 		alf.precision(3);
 		alf.fixed;
 		alf << "{ ";
-		for (int i = 0; i < toS.size() - 1; i++)
+		for (int i = 0; i < 10 && i < toS.size() - 1; i++)
 		{
 			alf << toS[i] << ", ";
 		}
+		if (toS.size() > 20) {
+			alf << "... ";
+			for (int i = toS.size() - 11; i < toS.size() - 1 && i >= 10; i++)
+			{
+				alf << toS[i] << ", ";
+			}
+		}
+		else {
+			for (int i = 10; i < toS.size() - 1; i++)
+			{
+				alf << toS[i] << ", ";
+			}
+		}
+		
 		alf << toS[toS.size() - 1] << " }";
 		return alf.str();
 	}
@@ -35,7 +49,12 @@ std::string vecToStringRounded(std::vector< D > toS)
 		alf.precision(3);
 		alf.fixed;
 		alf << "{ ";
-		for (int i = 0; i < toS.size() - 1; i++)
+		for (int i = 0; i < 10 && i < toS.size() - 1; i++)
+		{
+			alf << round(toS[i]) << ", ";
+		}
+		alf << " ... ";
+		for (int i = toS.size() - 11; i < toS.size() - 1 && i >= 10; i++)
 		{
 			alf << round(toS[i]) << ", ";
 		}
@@ -46,6 +65,24 @@ std::string vecToStringRounded(std::vector< D > toS)
 	{
 		return "";
 	}
+}
+
+template< typename D>
+void normalize(std::vector<D> &vect) {
+	double magnitude = mag(vect);
+	for (int i = 0; i < vect.size(); i++) {
+		vect[i] = vect[i] / magnitude;
+	}
+}
+
+template< typename D >
+double mag(std::vector<D> findMagOf) {
+	double hmm = 0.0;
+	for (int i = 0; i < findMagOf.size(); i++) {
+		hmm += pow(findMagOf[i], 2);
+	}
+	hmm = sqrt(hmm);
+	return hmm;
 }
 
 // sigmoid
