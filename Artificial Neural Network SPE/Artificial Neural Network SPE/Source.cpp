@@ -21,8 +21,8 @@ int main()
 	bool mnist = false;
 	int dataNum = 20 * 15;
 
-	std::vector<std::vector<double>> input = { { 1, 0, 0 } , { 0, 1, 1 },{ 0, 1, 0 }, { 0, 0, 0 }, { 0, 0, 1 }, { 1, 0, 1 }, { 1, 1, 1 } }; // };//
-	std::vector<std::vector<double>> output = { { 1, 0, 1 } , { 1, 0, 0 },{ 0, 1, 1 }, { 0, 0, 1 }, { 0, 1, 0 }, { 1, 1, 0 }, { 0, 0, 0 }}; // };//
+	std::vector<std::vector<double>> input = { { 0, 0, 0, 0 }, {0, 0, 0, 1}, {0, 0, 1, 1}, {1, 0, 0, 1}, {0, 0, 1, 0} };//{ { 1, 0, 0 },{ 0, 1, 1 },{ 0, 1, 0 },{ 0, 0, 0 },{ 0, 0, 1 },{ 1, 0, 1 },{ 1, 1, 1 }}; // };//
+	std::vector<std::vector<double>> output = { {0, 0, 0},    {0, 0, 1},    {0, 1, 0},    {1, 0, 0},    {0, 0, 1} };//{ { 1, 0, 1 },{ 1, 0, 0 },{ 0, 1, 1 },{ 0, 0, 1 },{ 0, 1, 0 },{ 1, 1, 0 },{ 0, 0, 0 }}; // };//
 
 
 	if (mnist) {
@@ -39,7 +39,7 @@ int main()
 		}
 	}
 
-	std::vector<int> D = { (int)input[0].size(), 7, 7, (int)output[0].size() };
+	std::vector<int> D = { (int)input[0].size(), 5, 5, (int)output[0].size() };
 	/*Load This Binary inc networks
 	3743
 	0: { -0.379, -1.32, 0.154, 0.31, -0.209, 1.18, -0.31 }
@@ -187,13 +187,15 @@ int main()
 		}
 	}
 	else {
-		for (int i = 0; i < 20 * 100; i++)
+		for (int i = 0; i < 20 * 300; i++)
 		{
 			N.train(input, output);
 			N.test(input, output);
 		}
 	}
+
 	N.print();
+	N.test(std::vector<std::vector<double>>{ {1, 0, 0, 1}}, std::vector<std::vector<double>>{ {1, 0, 0}});
 	
 	system("pause");
 	return 0;

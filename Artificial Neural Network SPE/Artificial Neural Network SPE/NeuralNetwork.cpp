@@ -16,7 +16,7 @@ NeuralNetwork::NeuralNetwork( std::vector< int > v ):
 	collection( std::vector< Layer >() ),
 	deriveSums( std::vector< std::vector< double >>() ),
 	target( std::vector< double >() ),
-	learningRate( 0.15 ),
+	learningRate( 0.01 ),
 	//maxChange( 1.2 ),
 	validError(0.00000001),
 	last( v.size() - 1 )
